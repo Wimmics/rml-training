@@ -1,0 +1,107 @@
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix htv: <http://www.w3.org/2011/http#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rml: <http://w3id.org/rml/> .
+@prefix schema: <http://schema.org/> .
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+
+<http://data.deezer.com/album/103248> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/103248";
+  schema:name "The Eminem Show" .
+
+<http://data.deezer.com/album/11047846> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/11047846";
+  schema:name "The Slim Shady LP" .
+
+<http://data.deezer.com/album/119606> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/119606";
+  schema:name "Curtain Call: The Hits" .
+
+<http://data.deezer.com/album/125748> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/125748";
+  schema:name "The Marshall Mathers LP" .
+
+<http://data.deezer.com/album/154556992> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/154556992";
+  schema:name "Recovery (Deluxe Edition)" .
+
+<http://data.deezer.com/album/194219042> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/194219042";
+  schema:name "Music To Be Murdered By - Side B (Deluxe Edition)" .
+
+<http://data.deezer.com/album/224581> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/224581";
+  schema:name "Curtain Call: The Hits (Deluxe Edition)" .
+
+<http://data.deezer.com/album/227447> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/227447";
+  schema:name "Encore" .
+
+<http://data.deezer.com/album/320098917> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/320098917";
+  schema:name "The Eminem Show (Expanded Edition)" .
+
+<http://data.deezer.com/album/343324187> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/343324187";
+  schema:name "Curtain Call 2" .
+
+<http://data.deezer.com/album/350198> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/350198";
+  schema:name "Relapse" .
+
+<http://data.deezer.com/album/430632> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/430632";
+  schema:name "Encore (Deluxe Version)" .
+
+<http://data.deezer.com/album/464090> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/464090";
+  schema:name "Relapse: Refill" .
+
+<http://data.deezer.com/album/505311641> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/505311641";
+  schema:name "The Marshall Mathers LP2 (Expanded Edition)" .
+
+<http://data.deezer.com/album/53227232> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/53227232";
+  schema:name "Revival" .
+
+<http://data.deezer.com/album/594581752> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/594581752";
+  schema:name "Houdini" .
+
+<http://data.deezer.com/album/595243> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/595243";
+  schema:name "Recovery" .
+
+<http://data.deezer.com/album/614167792> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/614167792";
+  schema:name "The Death of Slim Shady (Coup De Grâce)" .
+
+<http://data.deezer.com/album/641646351> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/641646351";
+  schema:name "The Death of Slim Shady (Coup De Grâce): Expanded Mourner’s Edition" .
+
+<http://data.deezer.com/album/7090496> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/7090496";
+  schema:name "The Marshall Mathers LP2" .
+
+<http://data.deezer.com/album/7090505> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/7090505";
+  schema:name "The Marshall Mathers LP2 (Deluxe)" .
+
+<http://data.deezer.com/album/72000342> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/72000342";
+  schema:name "Kamikaze" .
+
+<http://data.deezer.com/album/73301752> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/73301752";
+  schema:name "Venom (Music From The Motion Picture)" .
+
+<http://data.deezer.com/album/87718972> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/87718972";
+  schema:name "The Slim Shady LP (Expanded Edition)" .
+
+<http://data.deezer.com/album/88434192> a schema:MusicAlbum;
+  schema:mainEntityOfPage "https://www.deezer.com/album/88434192";
+  schema:name "The Marshall Mathers LP" .

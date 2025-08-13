@@ -1,0 +1,62 @@
+@prefix rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs:       <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd:        <http://www.w3.org/2001/XMLSchema#> .
+@prefix rr:         <http://www.w3.org/ns/r2rml#> .
+@prefix rml: 	    <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: 	    <http://semweb.mmlab.be/ns/ql#> .
+
+@prefix devinfra:   <http://w3id.org/devops-infra/server#> .
+@prefix noria:      <https://w3id.org/noria/ontology/> .
+
+@prefix ex:         <http://example.com/data/> .
+@base               <http://example.org/> .
+
+<#ServerMap> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "input_server.json";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.servers.*";
+  ];
+  rr:subjectMap [
+    rr:template "http://example.com/server/{$.id}";
+    rr:class devinfra:Server;
+  ];
+  rr:predicateObjectMap [
+    rr:predicate devinfra:hostname;
+    rr:objectMap [ rml:reference "$.hostname" ];
+  ];
+  rr:predicateObjectMap [
+    rr:predicate devinfra:ip;
+    rr:objectMap [ rml:reference "$.ipv4" ];
+  ].
+
+<#NICMap>
+  rml:logicalSource [
+    rml:source "input_nic.csv";
+    rml:referenceFormulation ql:CSV;
+  ];
+  rr:subjectMap [
+    rr:template "http://example.com/nic/{id}";
+    rr:class noria:NetworkInterface;
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [ rml:reference "name" ];
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate noria:networkInterfaceOperationalStatus;
+    rr:objectMap [ rr:template "http://example.com/status/{status}" ];
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate noria:networkInterfaceOf;
+    rr:objectMap [
+      rr:parentTriplesMap <#ServerMap>;
+      rr:joinCondition [
+        rr:child "server_id";
+        rr:parent "$.id";
+      ];
+    ];
+  ].

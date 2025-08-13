@@ -1,0 +1,20 @@
+@prefix devinfra: <http://w3id.org/devops-infra/server#> .
+@prefix ex: <http://example.com/data/> .
+@prefix noria: <https://w3id.org/noria/ontology/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rml: <http://w3id.org/rml/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/nic/12> a noria:NetworkInterface;
+  rdfs:label "eth0";
+  noria:networkInterfaceOf <http://example.com/server/3>;
+  noria:networkInterfaceOperationalStatus <http://example.com/status/up> .
+
+<http://example.com/nic/13> a noria:NetworkInterface;
+  rdfs:label "eth1";
+  noria:networkInterfaceOperationalStatus <http://example.com/status/down> .
+
+<http://example.com/server/3> a devinfra:Server;
+  devinfra:hostname "srv-web0";
+  devinfra:ip "10.0.0.37" .

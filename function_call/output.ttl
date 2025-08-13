@@ -1,0 +1,20 @@
+@prefix devinfra: <http://w3id.org/devops-infra/server#> .
+@prefix ex: <http://example.com/data/> .
+@prefix fnml: <http://semweb.mmlab.be/ns/fnml#> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix grel: <http://users.ugent.be/~bjdmeest/function/grel.ttl#> .
+@prefix idlab: <https://w3id.org/imec/idlab/function#> .
+@prefix noria: <https://w3id.org/noria/ontology/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rml: <http://w3id.org/rml/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/nic/12> a noria:NetworkInterface;
+  noria:networkInterfaceOperationalStatus "https://w3id.org/noria/kos/Resource/OperationalState/enabled" .
+
+<http://example.com/nic/13> a noria:NetworkInterface;
+  noria:networkInterfaceOperationalStatus "https://w3id.org/noria/kos/Resource/OperationalState/disabled" .
+
+<http://example.com/server/3> a devinfra:Server;
+  devinfra:hostname "srv-web0" .
