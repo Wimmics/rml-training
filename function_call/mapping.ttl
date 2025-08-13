@@ -28,6 +28,8 @@
   ];
   rr:predicateObjectMap [
     rr:predicate devinfra:hostname;
+    
+    # Lowercase the hostname
     rr:objectMap [
         fnml:functionValue [
             rr:predicateObjectMap [

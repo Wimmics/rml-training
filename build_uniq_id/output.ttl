@@ -1,0 +1,42 @@
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix dce: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fabio: <http://purl.org/spar/fabio/> .
+@prefix fnml: <http://semweb.mmlab.be/ns/fnml#> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix frbr: <http://purl.org/vocab/frbr/core#> .
+@prefix grel: <http://users.ugent.be/~bjdmeest/function/grel.ttl#> .
+@prefix idlab-fn: <https://w3id.org/imec/idlab/function#> .
+@prefix issa: <http://data-issa.cirad.fr/> .
+@prefix issa-ann: <http://data-issa.cirad.fr/ann/> .
+@prefix issa-ann-sel: <http://data-issa.cirad.fr/ann/selector/> .
+@prefix issa-ann-tar: <http://data-issa.cirad.fr/ann/target/> .
+@prefix issa-doc: <http://data-issa.cirad.fr/document/> .
+@prefix issapr: <http://data-issa.cirad.fr/property/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rml: <http://w3id.org/rml/> .
+@prefix schema: <http://schema.org/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+issa-ann:2cfab5ec40c26629e4bafb310f119285888ec20d 
+  a oa:Annotation, prov:Entity;
+  issapr:confidence 0.4098;
+  schema:about issa-doc:103705;
+  oa:hasBody wd:Q1522115;
+  oa:hasTarget issa-ann-tar:2cfab5ec40c26629e4bafb310f119285888ec20d .
+
+issa-ann-sel:2cfab5ec40c26629e4bafb310f119285888ec20d 
+  a oa:TextPositionSelector, oa:TextQuoteSelector;
+  oa:end 46;
+  oa:exact "source d'énergie";
+  oa:start 30 .
+
+issa-ann-tar:2cfab5ec40c26629e4bafb310f119285888ec20d 
+  oa:hasSelector issa-ann-sel:2cfab5ec40c26629e4bafb310f119285888ec20d;
+  oa:hasSource <http://data-issa.cirad.fr/document/103705#abstract> .

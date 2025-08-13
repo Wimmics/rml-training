@@ -1,0 +1,213 @@
+@prefix rml:    <http://semweb.mmlab.be/ns/rml#> .
+@prefix rr:     <http://www.w3.org/ns/r2rml#> .
+@prefix ql:     <http://semweb.mmlab.be/ns/ql#> .
+@prefix fnml:   <http://semweb.mmlab.be/ns/fnml#> .
+@prefix fno: 	<https://w3id.org/function/ontology#> .
+@prefix grel: 	<http://users.ugent.be/~bjdmeest/function/grel.ttl#> .
+@prefix idlab-fn:<https://w3id.org/imec/idlab/function#> .
+
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:    <http://www.w3.org/2002/07/owl#>.
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix bibo:   <http://purl.org/ontology/bibo/> .
+@prefix dce:    <http://purl.org/dc/elements/1.1/>.
+@prefix dct:    <http://purl.org/dc/terms/>.
+@prefix fabio:  <http://purl.org/spar/fabio/> .
+@prefix foaf:   <http://xmlns.com/foaf/0.1/>.
+@prefix frbr:   <http://purl.org/vocab/frbr/core#>.
+@prefix oa:     <http://www.w3.org/ns/oa#>.
+@prefix prov:   <http://www.w3.org/ns/prov#>.
+@prefix schema: <http://schema.org/>.
+@prefix wd:     <http://www.wikidata.org/entity/>.
+
+@base           <http://data-issa.cirad.fr/>.
+@prefix issa:   <http://data-issa.cirad.fr/>.
+@prefix issapr: <http://data-issa.cirad.fr/property/>.
+@prefix issa-doc:<http://data-issa.cirad.fr/document/>.
+@prefix issa-ann:<http://data-issa.cirad.fr/ann/>.
+@prefix issa-ann-tar:<http://data-issa.cirad.fr/ann/target/>.
+@prefix issa-ann-sel:<http://data-issa.cirad.fr/ann/selector/>.
+
+
+<#LS_entities>
+    a           rml:LogicalSource;
+    rml:source  "input.json";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$.*.abstract.entities.*" .
+
+
+<#Gen_Hashed_Uniq_ID>
+    # Create a unique identifier for the annotation by 
+    # hashing the concatenation of multiple fields
+    fnml:functionValue [
+        rr:predicateObjectMap [
+            rr:predicate fno:executes ;
+            rr:objectMap [ rr:constant grel:string_sha1 ]
+        ] ;
+        rr:predicateObjectMap [
+            rr:predicate grel:valueParameter ;
+            rr:objectMap [
+
+                # Concat paper_id, rawName, offsetStart, offsetEnd
+                fnml:functionValue [
+                    rr:predicateObjectMap [
+                        rr:predicate fno:executes ;
+                        rr:object idlab-fn:concatSequence
+                    ] ;
+                    rr:predicateObjectMap [
+                        rr:predicate rdf:_1 ;
+                        rr:objectMap [ rml:reference "$.paper_id" ]
+                    ] ;
+                    rr:predicateObjectMap [
+                        rr:predicate rdf:_2 ;
+                        rr:objectMap [ rml:reference "$.rawName" ]
+                    ] ;
+                    rr:predicateObjectMap [
+                        rr:predicate rdf:_3 ;
+                        rr:objectMap [ rml:reference "$.offsetStart" ]
+                    ] ;
+                    rr:predicateObjectMap [
+                        rr:predicate rdf:_4 ;
+                        rr:objectMap [ rml:reference "$.offsetEnd" ]
+                    ];
+                    rr:predicateObjectMap [
+                        rr:predicate idlab-fn:delimiter ;
+                        rr:object "_"
+                    ]
+                ]
+            ] 
+        ]
+    ].
+
+<#TM_annotation>
+    a rr:TriplesMap;
+    rml:logicalSource <#LS_entities>;
+    rr:subjectMap   [
+        rr:class oa:Annotation, prov:Entity;
+        fnml:functionValue [
+            # Concat namespace + hashed unique identifier
+            rr:predicateObjectMap [
+                rr:predicate fno:executes ;
+                rr:objectMap [ rr:constant idlab-fn:concat ]
+            ] ;
+            rr:predicateObjectMap [
+                rr:predicate idlab-fn:str ;
+                rr:objectMap [ rr:constant "http://data-issa.cirad.fr/ann/" ]
+            ] ;
+            rr:predicateObjectMap [
+                rr:predicate idlab-fn:otherStr ;
+                rr:objectMap <#Gen_Hashed_Uniq_ID>
+            ]
+        ];
+    ];
+
+    # About article    
+    rr:predicateObjectMap [
+        rr:predicate schema:about;
+        rr:objectMap [ rr:template "http://data-issa.cirad.fr/document/{$.paper_id}" ];
+    ];
+    # Annotation body
+    rr:predicateObjectMap [
+        rr:predicate oa:hasBody;
+        rr:objectMap [ rr:template "http://www.wikidata.org/entity/{$.wikidataId}" ];
+    ];
+    # Annotation target
+    rr:predicateObjectMap [
+        rr:predicate oa:hasTarget;
+        rr:objectMap [ rr:parentTriplesMap <#TM_target> ];
+    ];
+    # Annotation confidence
+    rr:predicateObjectMap [
+        rr:predicate issapr:confidence;
+        rr:objectMap [ rml:reference "$.confidence_score"; rr:datatype xsd:decimal ];
+    ];
+    .
+
+# Annotation target
+<#TM_target>
+    a rr:TriplesMap;
+    rml:logicalSource <#LS_entities>;
+    rr:subjectMap [
+        fnml:functionValue [
+            # Concat namespace + hashed identifier
+            rr:predicateObjectMap [
+                rr:predicate fno:executes ;
+                rr:objectMap [ rr:constant idlab-fn:concat ]
+            ] ;
+            rr:predicateObjectMap [
+                rr:predicate idlab-fn:str ;
+                rr:objectMap [ rr:constant "http://data-issa.cirad.fr/ann/target/" ]
+            ] ;
+            rr:predicateObjectMap [
+                rr:predicate idlab-fn:otherStr ;
+                rr:objectMap <#Gen_Hashed_Uniq_ID>
+            ]
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate oa:hasSource;
+        rr:objectMap [ rr:template "http://data-issa.cirad.fr/document/{$.paper_id}#abstract" ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate oa:hasSelector;
+        rr:objectMap [ rr:parentTriplesMap <#TM_selector> ];
+    ].
+
+
+# Annotation target selector
+<#TM_selector>
+    a rr:TriplesMap;
+    rml:logicalSource <#LS_entities>;
+    rr:subjectMap [
+        fnml:functionValue [
+            # Concat namespace + hashed identifier
+            rr:predicateObjectMap [
+                rr:predicate fno:executes ;
+                rr:objectMap [ rr:constant idlab-fn:concat ]
+            ] ;
+            rr:predicateObjectMap [
+                rr:predicate idlab-fn:str ;
+                rr:objectMap [ rr:constant "http://data-issa.cirad.fr/ann/selector/" ]
+            ] ;
+            rr:predicateObjectMap [
+                rr:predicate idlab-fn:otherStr ;
+                rr:objectMap <#Gen_Hashed_Uniq_ID>
+            ]
+        ];
+        rr:class oa:TextPositionSelector, oa:TextQuoteSelector;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate oa:start;
+        rr:objectMap [ rml:reference "$.offsetStart"; rr:datatype xsd:integer ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate oa:end;
+        rr:objectMap [ rml:reference "$.offsetEnd"; rr:datatype xsd:integer ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate oa:exact;
+        rr:objectMap [ rml:reference "$.rawName" ];
+    ];
+    .
+
+
+# Example of expected output:
+#<http://data-issa.cirad.fr/ann/sha1_hash>
+#      a                    prov:Entity , oa:Annotation ;
+#      rdfs:label           "named entity 'Infection'" ;
+#      issapr:confidence    0.3729 ;
+#      schema:about         <http://data-issa.cirad.fr/document/600955> ;
+#      oa:hasBody           wd:Q166231 ;
+#      oa:hasTarget         <http://data-issa.cirad.fr/ann/target/sha1_hash> .
+#
+#<http://data-issa.cirad.fr/ann/target/sha1_hash>
+#      oa:hasSelector       <http://data-issa.cirad.fr/ann/selector/sha1_hash> ;
+#      oa:hasSource         <http://data-issa.cirad.fr/document/600955#body_text> .
+#
+#<http://data-issa.cirad.fr/ann/selector/sha1_hash>
+#      a                    oa:TextPositionSelector , oa:TextQuoteSelector ;
+#      oa:start             12410 ;
+#      oa:end               12419 ;
+#      oa:exact             "Infection" .
