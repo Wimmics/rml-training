@@ -1,0 +1,3 @@
+id,server_id,name,status
+12,3,eth0,up
+13,4,eth1,down

@@ -1,0 +1,68 @@
+prefixes:
+  rdf:        http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  rdfs:       http://www.w3.org/2000/01/rdf-schema#
+  xsd:        http://www.w3.org/2001/XMLSchema#
+  rr:         http://www.w3.org/ns/r2rml#
+  rml: 	      http://semweb.mmlab.be/ns/rml#
+  ql: 	      http://semweb.mmlab.be/ns/ql#
+
+  fnml:       http://semweb.mmlab.be/ns/fnml#
+  fno: 	      https://w3id.org/function/ontology#
+  grel:       http://users.ugent.be/~bjdmeest/function/grel.ttl#
+  idlab:      https://w3id.org/imec/idlab/function#
+
+  devinfra:   http://w3id.org/devops-infra/server#
+  noria:      https://w3id.org/noria/ontology/
+  ex:         http://example.com/data/
+
+
+mappings:
+
+  ServerMap_verbose:
+    sources:
+      - access: input_server.json
+        referenceFormulation: jsonpath
+        iterator: "$.servers.*"
+    subject: http://example.com/server-long/$($.id)
+    predicateobjects:
+      - predicate: rdf:type
+        object: devinfra:Server
+      - predicate: devinfra:hostname
+        object: 
+          function: grel:toLowerCase
+          parameters:
+            - [grel:valueParameter, $($.hostname)]
+      - predicate: devinfra:ip
+        object: $($.ipv4)
+
+  ServerMap_shorter:
+    sources:
+      - access: input_server.json
+        referenceFormulation: jsonpath
+        iterator: "$.servers.*"
+    s: http://example.com/server-shorter/$($.id)
+    po:
+      - p: rdf:type
+        o: devinfra:Server
+      - p: devinfra:hostname
+        o: 
+          fn: grel:toLowerCase
+          pms:
+            - [grel:valueParameter, $($.hostname)]
+      - p: devinfra:ip
+        o: $($.ipv4)
+
+
+  ServerMap_shortest:
+    sources:
+      - [input_server.json~jsonpath, "$.servers.*"]
+    s: http://example.com/server-shortest/$($.id)
+    po:
+      - [a, devinfra:Server]
+      - p: devinfra:hostname
+        o: 
+          fn: grel:toLowerCase
+          pms:
+            - [grel:valueParameter, $($.hostname)]
+      - [devinfra:ip, $($.ipv4)]
+
