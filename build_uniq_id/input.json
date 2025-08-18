@@ -10,16 +10,9 @@
           "confidence_score": 0.4098,
           "wikipediaExternalRef": 148823,
           "wikidataId": "Q1522115",
-          "domains": [
-            "Energy"
-          ],
           "paper_id": "103705"
         }
-      ],
-      "language": {
-        "lang": "fr",
-        "conf": 0.0
-      }
+      ]
     }
   }
 ]
