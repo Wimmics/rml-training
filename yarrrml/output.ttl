@@ -7,19 +7,13 @@
 @prefix fno: <https://w3id.org/function/ontology#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix grel: <http://users.ugent.be/~bjdmeest/function/grel.ttl#> .
-@prefix idlab: <https://w3id.org/imec/idlab/function#> .
 @prefix noria: <https://w3id.org/noria/ontology/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix rml: <http://w3id.org/rml/> .
 @prefix void: <http://rdfs.org/ns/void#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://example.com/server-long/3> a "http://w3id.org/devops-infra/server#Server";
-  devinfra:hostname "srv-web0";
-  devinfra:ip "10.0.0.37" .
-
-<http://example.com/server-shorter/3> a "http://w3id.org/devops-infra/server#Server";
+<http://example.com/server-long/3> a devinfra:Server;
   devinfra:hostname "srv-web0";
   devinfra:ip "10.0.0.37" .
 

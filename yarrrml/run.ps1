@@ -1,5 +1,7 @@
+docker pull rmlio/yarrrml-parser
+
 # Convert the YARRRML rules to RML
-docker run --rm .:/data rmlio/yarrrml-parser:latest `
+docker run --rm -v .:/data rmlio/yarrrml-parser:latest `
     -i /data/mapping.yml `
     -o /data/mapping.rml.ttl
 

@@ -31,6 +31,28 @@
 @prefix issa-ann-sel:<http://data-issa.cirad.fr/ann/selector/>.
 
 
+# Example of expected output:
+#<http://data-issa.cirad.fr/ann/uniq_id>
+#      a                    prov:Entity , oa:Annotation ;
+#      rdfs:label           "named entity 'source d'énergie'" ;
+#      issapr:confidence    0.4098 ;
+#      schema:about         <http://data-issa.cirad.fr/document/103705> ;
+#      oa:hasBody           wd:Q1522115 ;
+#      oa:hasTarget         <http://data-issa.cirad.fr/ann/target/uniq_id> .
+#
+#<http://data-issa.cirad.fr/ann/target/uniq_id>
+#      oa:hasSelector       <http://data-issa.cirad.fr/ann/selector/uniq_id> ;
+#      oa:hasSource         <http://data-issa.cirad.fr/document/103705#abstract> .
+#
+#<http://data-issa.cirad.fr/ann/selector/uniq_id>
+#      a                    oa:TextPositionSelector , oa:TextQuoteSelector ;
+#      oa:start             30 ;
+#      oa:end               46 ;
+#      oa:exact             "source d'énergie" .
+#
+# uniq_id: hash of the concatenation of paper_id, rawName, offsetStart, offsetEnd
+
+
 <#LS_entities>
     a           rml:LogicalSource;
     rml:source  "input.json";
@@ -191,23 +213,3 @@
         rr:objectMap [ rml:reference "$.rawName" ];
     ];
     .
-
-
-# Example of expected output:
-#<http://data-issa.cirad.fr/ann/sha1_hash>
-#      a                    prov:Entity , oa:Annotation ;
-#      rdfs:label           "named entity 'Infection'" ;
-#      issapr:confidence    0.3729 ;
-#      schema:about         <http://data-issa.cirad.fr/document/600955> ;
-#      oa:hasBody           wd:Q166231 ;
-#      oa:hasTarget         <http://data-issa.cirad.fr/ann/target/sha1_hash> .
-#
-#<http://data-issa.cirad.fr/ann/target/sha1_hash>
-#      oa:hasSelector       <http://data-issa.cirad.fr/ann/selector/sha1_hash> ;
-#      oa:hasSource         <http://data-issa.cirad.fr/document/600955#body_text> .
-#
-#<http://data-issa.cirad.fr/ann/selector/sha1_hash>
-#      a                    oa:TextPositionSelector , oa:TextQuoteSelector ;
-#      oa:start             12410 ;
-#      oa:end               12419 ;
-#      oa:exact             "Infection" .
