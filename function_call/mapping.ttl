@@ -59,7 +59,7 @@
     rr:predicate noria:networkInterfaceOperationalStatus;
     
     # If status=="up" then res:OperationalState/enabled else res:OperationalState/disabled
-    # Not that RMLMapper 7.3.3 always generates literals here, not IRIs, see: https://github.com/RMLio/rmlmapper-java/issues/263
+    # Not that RMLMapper 8.0.1 always generates literals here, not IRIs, see: https://github.com/RMLio/rmlmapper-java/issues/263
     rr:objectMap [
       fnml:functionValue [
         rr:predicateObjectMap [rr:predicate fno:executes ; rr:object grel:controls_if ];

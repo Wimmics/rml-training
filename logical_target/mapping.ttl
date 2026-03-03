@@ -2,26 +2,35 @@
 @prefix rdfs:       <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix xsd:        <http://www.w3.org/2001/XMLSchema#> .
 @prefix rr:         <http://www.w3.org/ns/r2rml#> .
-@prefix rml: 	    <http://semweb.mmlab.be/ns/rml#> .
-@prefix ql: 	    <http://semweb.mmlab.be/ns/ql#> .
+@prefix rml: 	      <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: 	      <http://semweb.mmlab.be/ns/ql#> .
 @prefix rmlt:       <http://semweb.mmlab.be/ns/rml-target#>.
 @prefix comp:       <http://semweb.mmlab.be/ns/rml-compression#>.
 @prefix formats:    <http://www.w3.org/ns/formats/>.
 @prefix void:       <http://rdfs.org/ns/void#>.
-
+@prefix sd: 	      <http://www.w3.org/ns/sparql-service-description#>.
 @prefix devinfra:   <http://w3id.org/devops-infra/server#> .
 @prefix noria:      <https://w3id.org/noria/ontology/> .
 
 @prefix ex:         <http://example.com/data/> .
 @base               <http://example.org/> .
 
-<#Target> a rmlt:LogicalTarget;
+<#DumpTarget> a rmlt:LogicalTarget;
   rmlt:target [ 
     a void:Dataset;
     void:dataDump <file://dump.jsonld.gz>;
   ]; 
   rmlt:serialization formats:JSON-LD;
   rmlt:compression comp:gzip.
+
+
+<#SparqlTarget> a rmlt:LogicalTarget;
+  rmlt:target [ 
+    a sd:Service;
+    sd:endpoint <http://example.com/sparql-update>;
+    sd:supportedLanguage sd:SPARQL11Update ;
+  ].
+
 
 <#ServerMap> a rr:TriplesMap;
   rml:logicalSource [
@@ -32,7 +41,7 @@
   rr:subjectMap [
     rr:template "http://example.com/server/{$.id}";
     rr:class devinfra:Server;
-    rml:logicalTarget <#Target>;
+    rml:logicalTarget <#DumpTarget>;
   ];
   rr:predicateObjectMap [
     rr:predicate devinfra:hostname;
